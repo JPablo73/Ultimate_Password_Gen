@@ -3,7 +3,6 @@ var generateBtn = document.querySelector("#generate");
 
 const characterArray = ["ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklnmopqrstuvwxyz", "0123456789", "!@#$%&*?"];
 
-var userInput = [];
 
 // Write password to the #password input
 function writePassword() {
@@ -13,10 +12,14 @@ function writePassword() {
     passwordText.value = password;
 }
 
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
 
-// prompt: length of char selection
+// prompt for user selection to gen password
 function generatePassword() {
     var characterLength = 0;
+    var userInput = [];
+
     while ((characterLength < 8 || characterLength > 16) || Number.isInteger(characterLength) === false) {
         characterLength = parseInt(prompt("Please select character length between 8 - 16"));
     }
@@ -25,7 +28,6 @@ function generatePassword() {
     var lowerCase = "";
     var numbers = "";
     var symbols = "";
-
 
     while (!upperCase && !lowerCase && !numbers && !symbols) {
 
@@ -54,13 +56,11 @@ function generatePassword() {
         userInput.push(characterArray[3])
     }
 
-
     var password = "";
 
-    //
     userInput = userInput.join("").split("");
 
-    //
+
     for (var i = 0; i < characterLength; i++) {
         var index = (Math.floor(Math.random() * userInput.length));
         password = password + userInput[index]
@@ -68,9 +68,6 @@ function generatePassword() {
 
     return password;
 }
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
 
 
 
